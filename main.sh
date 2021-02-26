@@ -74,6 +74,7 @@ fi
 
 if [ -f "setup.py" ]; then
     echo Installing project
+    python3 -m pip install wheel
     python3 -m pip install .
 fi
 
