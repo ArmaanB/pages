@@ -72,6 +72,11 @@ if [ "$INPUT_INSTALL_REQUIREMENTS" = "true" ] ; then
     echo ::endgroup::
 fi
 
+if [ -f "setup.py" ]; then
+    echo Installing project
+    pip3 install .
+fi
+
 echo ::group:: Creating temp directory
 tmp_dir=$(mktemp -d -t pages-XXXXXXXXXX)
 echo Temp directory \"$tmp_dir\" is created
