@@ -15,42 +15,42 @@ echo ::endgroup::
 # The actions doesn't depends on any images,
 # so we have to try various package manager.
 echo ::group:: Installing Sphinx
-if command -v pip3 &>/dev/null; then
-    echo Found pip3 in system path
+if command -v python3 -m pip &>/dev/null; then
+    echo Found python3 -m pip in system path
 elif command -v apt &>/dev/null; then
     # Debian/Ubuntu
-    echo Installing pip3 via apt
+    echo Installing python3 -m pip via apt
     sudo apt update
     sudo apt install python3-pip python3-setuptools
 elif command -v zypper &>/dev/null; then
     # openSUSE
-    echo Installing pip3 via zypper
+    echo Installing python3 -m pip via zypper
     sudo zypper update
     sudo zypper install python3-pip python3-setuptools
 elif command -v yum &>/dev/null; then
     # RHEL, CentOS
-    echo Installing pip3 via yum
+    echo Installing python3 -m pip via yum
     sudo yum update
     sudo yum install python-pip python-setuptools
 elif command -v pacman &>/dev/null; then
     # ArchLinux
-    echo Installing pip3 via pacman
+    echo Installing python3 -m pip via pacman
     sudo pacman -Syy
     sudo pacman -S python-pip python-setuptools
 elif command -v brew &>/dev/null; then
     # macOS
-    echo Installing pip3 via homebrew
+    echo Installing python3 -m pip via homebrew
     brew update
     brew install python
 fi
-if ! command -v pip3 &>/dev/null; then
+if ! command -v python3 -m pip &>/dev/null; then
     echo Pip is not successfully installed
     exit 1
 else
     echo Pip is successfully installed
 fi
 echo Installing sphinx via pip
-pip3 install -U sphinx
+python3 -m pip install -U sphinx
 echo Adding user bin to system path
 PATH=$HOME/.local/bin:$PATH
 if ! command -v sphinx-build &>/dev/null; then
@@ -65,7 +65,7 @@ if [ "$INPUT_INSTALL_REQUIREMENTS" = "true" ] ; then
     echo ::group:: Installing requirements
     if [ -f "$doc_dir/requirements.txt" ]; then
         echo Installing python requirements
-        pip3 install -r $doc_dir/requirements.txt
+        python3 -m pip install -r $doc_dir/requirements.txt
     else
         echo No requirements.txt found, skipped
     fi
@@ -74,7 +74,7 @@ fi
 
 if [ -f "setup.py" ]; then
     echo Installing project
-    pip3 install .
+    python3 -m pip install .
 fi
 
 echo ::group:: Creating temp directory
