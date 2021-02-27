@@ -21,7 +21,7 @@ elif command -v apt &>/dev/null; then
     # Debian/Ubuntu
     echo Installing python3 -m pip via apt
     sudo apt update
-    sudo apt install python3-pip python3-setuptools
+    sudo apt install python3-pip python3-setuptools libzbar0
 elif command -v zypper &>/dev/null; then
     # openSUSE
     echo Installing python3 -m pip via zypper
